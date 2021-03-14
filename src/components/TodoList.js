@@ -2,13 +2,21 @@ import React from "react";
 import "./../App.css";
 import Todo from "./Todo";
 
-const TodoList = ({ todos, setTodos }) => {
+const TodoList = ({ todos, setTodos, filterTodos }) => {
   return (
     <div className="todo-container">
       <ul className="todo-list">
-        {todos.map((todo) => (
-          <Todo todos={todos} setTodos={setTodos} todo={todo} key={todo.id} />
-        ))}
+        {filterTodos.length > 0
+          ? filterTodos.map((todo) => (
+              <Todo
+                filterTodos={filterTodos}
+                todos={todos}
+                setTodos={setTodos}
+                todo={todo}
+                key={todo.id}
+              />
+            ))
+          : "NO TODOS"}
       </ul>
     </div>
   );
