@@ -25,13 +25,6 @@ body {
   padding: 5px;
   margin-left: 10px;
 }
-.form-input-number {
-  font-size: 18px;
-  padding: 5px;
-  margin-left: 10px;
-  width: 120px;
-  margin-right: 10px;
-}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -45,6 +38,9 @@ input::-webkit-inner-spin-button {
   width: 30px;
   font-size: 20px;
   user-select: none;
+}
+.datepicker {
+  padding: 5px;
 }
 .todo-container {
   padding-top: 30px;

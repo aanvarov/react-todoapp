@@ -43,11 +43,24 @@ const Todo = ({ todo, setTodos, todos }) => {
       })
     );
   };
+  const funv = () => {
+    if (todo.numOfDays < 0) {
+      return (
+        "Overdue " +
+        Math.abs(todo.numOfDays) +
+        (Math.abs(todo.numOfDays) === 1 ? " day" : " days")
+      );
+    } else if (todo.numOfDays === 0) {
+      return "Deadline is today";
+    } else {
+      return (
+        todo.numOfDays + (todo.numOfDays === 1 ? " day left" : " days left")
+      );
+    }
+  };
   return (
     <div key={todo.id} className="todo">
-      <div className="deadline">
-        {todo.numOfDays} {todo.numOfDays === 1 ? "day" : "days"} left
-      </div>
+      <div className="deadline">{funv()}</div>
       <li
         className={
           "todo-item " +

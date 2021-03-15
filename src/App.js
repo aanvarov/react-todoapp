@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import TodoList from "./components/TodoList";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -8,12 +11,16 @@ function App() {
   const [filterTodos, setFilterTodos] = useState([]);
   const [selectState, setSelectState] = useState("");
   const [deadline, setDeadline] = useState(0);
+  const [time, setTime] = useState(new Date());
 
   const inputHandler = (e) => {
     setInputText(e.target.value);
   };
   const deadlineHandler = (e) => {
-    setDeadline(Number(e.target.value));
+    let dayOffSet = 24 * 60 * 60 * 1000;
+    console.log(Math.ceil((e - new Date()) / dayOffSet));
+    setDeadline(Math.ceil((e - new Date()) / dayOffSet));
+    setTime(e);
   };
 
   const submitHandler = (e) => {
@@ -27,11 +34,11 @@ function App() {
           text: inputText,
           category: "new",
           id: Math.floor(Math.random() * 1000),
-          numOfDays: deadline === 0 ? 1 : deadline,
+          numOfDays: deadline,
         },
       ]);
       setInputText("");
-      setDeadline(0);
+      //setDeadline(0);
     }
   };
 
@@ -100,16 +107,14 @@ function App() {
           type="text"
           placeholder="Enter a task name"
         />
-        <input
-          type="number"
-          placeholder="Set deadline"
-          className="form-input-number"
-          value={deadline === 0 ? "" : deadline}
-          onChange={deadlineHandler}
-        />
         <button className="form-btn" onClick={submitHandler} type="submit">
           +
         </button>
+        <DatePicker
+          onChange={deadlineHandler}
+          className="datepicker"
+          selected={time}
+        />
 
         <select className="form-select" onChange={selectHandler}>
           <option value="all">All</option>
